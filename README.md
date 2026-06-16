@@ -1,48 +1,55 @@
-# vue-tutorial
+# ✅ Todo App — Vue.js
 
-This template should help get you started developing with Vue 3 in Vite.
+Une application de gestion de tâches réalisée pour apprendre les bases de **Vue 3** avec la Composition API.
 
-## Recommended IDE Setup
+## 🚀 Stack
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [Vue 3](https://vuejs.org/) — Composition API avec `<script setup>`
+- [Vite](https://vitejs.dev/) — Bundler
+- TypeScript
 
-## Recommended Browser Setup
+## ✨ Fonctionnalités
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Ajouter une tâche (via bouton ou touche Entrée)
+- Supprimer une tâche
+- Marquer une tâche comme terminée
+- Compteur dynamique des tâches restantes
 
-## Type Support for `.vue` Imports in TS
+## 🧠 Concepts Vue.js appris
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+| Concept | Usage |
+|---|---|
+| `ref()` | État réactif (liste de tâches, input) |
+| `computed()` | Compteur dynamique basé sur `tasks.length` |
+| `v-for` | Affichage de la liste |
+| `v-model` | Liaison de l'input texte |
+| `:class` | Style conditionnel selon `task.done` |
+| `@click` / `@keyup.enter` | Gestion des événements |
+| `@click.stop` | Arrêt de la propagation d'événement |
 
-## Customize configuration
+## 📦 Installation
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```bash
+# Cloner le dépôt
+git clone https://github.com/ton-pseudo/todo-vue.git
+cd todo-vue
 
-## Project Setup
-
-```sh
+# Installer les dépendances
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Lancer le serveur de développement
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## 🗺️ Améliorations prévues
 
-```sh
-npm run build
-```
+- [ ] Filtres Toutes / Actives / Terminées
+- [ ] Modification d'une tâche existante
+- [ ] Persistance avec `localStorage`
+- [ ] Découpage en composants (`TodoItem.vue`, `TodoFilter.vue`)
+- [ ] Connexion à une API Symfony
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## 📚 Ressources
 
-```sh
-npm run test:unit
-```
+- [Documentation Vue.js](https://vuejs.org/guide/introduction.html)
+- [Documentation Vite](https://vitejs.dev/guide/)
