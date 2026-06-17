@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
-const newTask = ref('')
+import TodoItem from './components/TodoItem.vue'
+import { ref, computed } from 'vue'
 
 // Task list
 const tasks = ref([
@@ -10,10 +9,7 @@ const tasks = ref([
   { text: 'Finir le projet Pedibus', done: false },
 ])
 
-//Dynamic display of task count
-const taskCountMessage = computed(() =>
-  tasks.value.length === 0 ? 'No tasks were added, let\'s get to work !' : 'you have ' + tasks.value.length + ' left to do!',
-)
+const newTask = ref('')
 
 // Add a new task and increment the task count
 function addTask() {
@@ -25,28 +21,29 @@ function removeTask(index: number) {
   // delete FROM the index in the array
   tasks.value.splice(index, 1)
 }
+
+//Dynamic display of task count
+const taskCountMessage = computed(() =>
+  tasks.value.length === 0
+    ? "No tasks were added, let's get to work !"
+    : 'you have ' + tasks.value.length + ' left to do!',
+)
 </script>
 
 <template>
   <h1>Todo App</h1>
   <p>{{ taskCountMessage }}</p>
-  <div>
-    <ul>
-      <li
-        v-for="(task, index) in tasks"
-        @click="task.done = !task.done"
-        :class="{ active: task.done }"
-      >
-        {{ task.text }}
+  <ul>
+    <!-- index key required for reactivity -->
+    <TodoItem
+      v-for="(task, index) in tasks"
+      :task="task"
+      :key="index"
+      @remove="removeTask(index)"
+      @toggle="task.done = !task.done"
+    />
 
-        {{ task.done ? '✔' : '✘' }}
-
-        <!-- stop the click propagation -->
-        <button @click.stop="removeTask(index)">Remove Task</button>
-      </li>
-    </ul>
-  </div>
-
+  </ul>
   <div>
     <input v-model="newTask" />
 
