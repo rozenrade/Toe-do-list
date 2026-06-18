@@ -6,10 +6,10 @@ const emit = defineEmits(['remove', 'toggle'])
 <template>
   <!-- emit allows to signal to parent giving orders -->
   <li @click="emit('toggle')" :class="{ active: task.done }">
+    <button @click.stop="emit('remove')">X</button>
     {{ task.text }}
 
     {{ task.done ? '✔' : '✘' }}
     <!-- stop the click propagation -->
-    <button @click.stop="emit('remove')">Remove Task</button>
   </li>
 </template>
