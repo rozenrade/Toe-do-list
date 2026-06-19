@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import TodoItem from './components/TodoItem.vue'
-import { ref, computed } from 'vue'
-
-const newTask = ref('')
-const currentFilter = ref('all')
+import { ref, computed, watch } from 'vue'
 
 // Task list
-const tasks = ref([
-  { text: 'Apprendre Vue.JS', done: false, id: crypto.randomUUID() },
-  { text: 'Apprendre TypeScript', done: false, id: crypto.randomUUID() },
-  { text: 'Finir le projet Pedibus', done: false, id: crypto.randomUUID() },
-])
+const tasks = ref([{ text: 'Ma première tâche', done: false, id: crypto.randomUUID() }])
+const tasksFromStorage = localStorage.getItem('tasks')
+const currentFilter = ref('all')
+const newTask = ref('')
 
+if (tasksFromStorage) {
+  tasks.value = JSON.parse(tasksFromStorage)
+}
+
+// FILTERS
 // if needed to access ref, .value mandatory
 const taskState = computed(() => {
   if (currentFilter.value === 'done') {
@@ -32,7 +33,11 @@ const taskCountMessage = computed(() =>
 
 // Add a new task and increment the task count
 function addTask() {
+  if (newTask.value === '') {
+    return
+  }
   tasks.value.push({ text: newTask.value, done: false, id: crypto.randomUUID() })
+
   newTask.value = ''
 }
 
@@ -41,6 +46,14 @@ function removeTask(id: string) {
   const index = tasks.value.findIndex((task) => task.id === id)
   tasks.value.splice(index, 1)
 }
+
+watch(
+  tasks,
+  () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks.value))
+  },
+  { deep: true },
+)
 </script>
 
 <template>
